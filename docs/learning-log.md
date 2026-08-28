@@ -60,6 +60,14 @@ Docker Desktop/Engine -> runs the kind node containers
 
 This resembles real Kubernetes administration because the client communicates with the API Server, but `kind` simplifies the infrastructure by representing nodes as containers on the local machine.
 
+### Standard Kubernetes versus lab-specific choices
+
+This distinction should be explained before any practical command. The Kubernetes concepts we are learning are not specific to `kind`: a cluster has a control plane and Nodes; the API Server is the entry point; kubelets and a container runtime run on Nodes; Kubernetes manages Pods and other resources; namespaces organize namespaced resources; controllers reconcile actual state with desired state; and `kubectl` uses a kubeconfig context to address a cluster.
+
+The local implementation is specific to this lab. Windows, Docker Desktop, WSL2, Ubuntu, and `kind` are conveniences for running Kubernetes locally. `kind` represents a Node with a Docker container. In a professional environment, a Node is more commonly a physical server or a Linux VM, and the Node is not wrapped in an outer Docker container. A container runtime still runs the containers inside Pods, but that is a different role from using a container to simulate the Node itself.
+
+Using `kind` is appropriate for the first stage because it focuses effort on Kubernetes operation: API access, resources, manifests, scheduling, reconciliation, networking, storage, and troubleshooting. It is less realistic for infrastructure work such as provisioning servers, SSH access, system services, disks, certificates, high availability, and production network boundaries. A later VM-based stage can cover those differences without obscuring the first Kubernetes concepts.
+
 ### Security awareness without scope creep
 
 This local setup does not use SSH because we administer Kubernetes through its API Server rather than logging into a separate Linux VM. The API Server is exposed on `127.0.0.1` through a local port, so the lab is intended for access from this computer, not as a production network design. The connection uses HTTPS/TLS and credentials stored in the local kubeconfig.

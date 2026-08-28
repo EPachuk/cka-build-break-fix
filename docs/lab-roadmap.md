@@ -20,6 +20,8 @@ PowerShell is the default shell for this Windows-based lab. Ubuntu in WSL2 is us
 ### Day 01 - Environment and Cluster
 
 - [ ] Review the local architecture: Windows, WSL2, Ubuntu, Docker Desktop, `kind`, and `kubectl`.
+- [ ] Separate standard Kubernetes concepts from lab-specific implementation choices.
+- [ ] Explain why `kind` is a deliberate simplification and what it does not reproduce from production.
 - [ ] Verify the installed tools and Docker Engine.
 - [ ] Explain what a Kubernetes cluster contains at a high level.
 - [ ] Create the `kind` cluster from PowerShell.

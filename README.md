@@ -76,6 +76,16 @@ Windows -> Docker Desktop and its WSL2/Linux backend -> Docker Engine
 
 This setup is realistic for practicing the Kubernetes API, resources, contexts, manifests, and troubleshooting. It simplifies production infrastructure because the nodes are Docker containers rather than independent servers.
 
+## What Is Standard and What Is Simplified
+
+This distinction must be explicit before each lab step. The following are standard Kubernetes concepts that also apply in professional environments: clusters, control planes, worker nodes, the API Server, kubelets, container runtimes, Pods, namespaces, Services, controllers, desired state, `kubectl`, kubeconfig contexts, manifests, events, logs, and reconciliation.
+
+The following are choices specific to this local lab: Windows as the host, Docker Desktop and WSL2 as the local foundation, and `kind` creating Kubernetes nodes as Docker containers. In production, a Node is more commonly a physical server or a Linux virtual machine, and several independent nodes are used for capacity and availability. A Node does not inherently require Docker as an outer layer.
+
+`kind` is therefore a deliberate simplification, not the definition of Kubernetes. It lets us practice the Kubernetes API and operations without first building a multi-VM infrastructure. It does not fully reproduce server provisioning, SSH administration, system services, disks, high availability, or production network boundaries. Those differences must be named when they matter; they must not be presented as if they were universal Kubernetes behavior.
+
+The project will first use `kind` to learn Kubernetes operations, then can add a VM-based stage to study Node and cluster infrastructure more realistically.
+
 ## CKA Domains
 
 The project will progressively cover:
