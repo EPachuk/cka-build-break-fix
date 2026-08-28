@@ -60,6 +60,12 @@ Docker Desktop/Engine -> runs the kind node containers
 
 This resembles real Kubernetes administration because the client communicates with the API Server, but `kind` simplifies the infrastructure by representing nodes as containers on the local machine.
 
+### Security awareness without scope creep
+
+This local setup does not use SSH because we administer Kubernetes through its API Server rather than logging into a separate Linux VM. The API Server is exposed on `127.0.0.1` through a local port, so the lab is intended for access from this computer, not as a production network design. The connection uses HTTPS/TLS and credentials stored in the local kubeconfig.
+
+These credentials and kubeconfig files must remain private and outside Git. Docker Engine access is also highly privileged, and a local container-based node is not the same security boundary as an independent production server. We will call out these risks when they appear, while keeping detailed hardening, PKI, firewall, and production security design outside the current lab scope.
+
 ### Commands learned
 
 - `winget install --id Git.Git --exact --scope user`
