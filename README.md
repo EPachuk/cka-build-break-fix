@@ -64,4 +64,8 @@ The project will progressively cover:
 
 ## Status
 
-Stage 1: repository initialized. First Kubernetes lab pending.
+Stage 1: local environment setup in progress. The repository and initial documentation are published; create the first local cluster before starting the first lab.
+
+## Environment
+
+The planned local environment uses Docker Desktop with WSL2 and Ubuntu as the Linux foundation, plus `kubectl`, `kind`, and Helm. This combination provides a quick local cluster while keeping the Linux and container fundamentals visible for later CKA labs.
