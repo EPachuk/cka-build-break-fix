@@ -19,16 +19,30 @@ PowerShell is the default shell for this Windows-based lab. Ubuntu in WSL2 is us
 
 ### Day 01 - Environment and Cluster
 
-- [ ] Review the local architecture: Windows, WSL2, Ubuntu, Docker Desktop, `kind`, and `kubectl`.
-- [ ] Separate standard Kubernetes concepts from lab-specific implementation choices.
-- [ ] Explain why `kind` is a deliberate simplification and what it does not reproduce from production.
-- [ ] Verify the installed tools and Docker Engine.
-- [ ] Explain what a Kubernetes cluster contains at a high level.
-- [ ] Create the `kind` cluster from PowerShell.
-- [ ] Inspect nodes, namespaces, contexts, and system Pods.
+- [x] Review the local architecture: Windows, WSL2, Ubuntu, Docker Desktop, `kind`, and `kubectl`.
+- [x] Separate standard Kubernetes concepts from lab-specific implementation choices.
+- [x] Explain why `kind` is a deliberate simplification and what it does not reproduce from production.
+- [x] Verify the installed tools and Docker Engine.
+- [x] Explain what a Kubernetes cluster contains at a high level.
+- [x] Create the `kind` cluster from PowerShell.
+- [x] Inspect nodes, namespaces, contexts, and system Pods.
 - [ ] Record the cluster creation and observations.
 
 **Evidence:** a reachable cluster, a valid `kubectl` context, and an explanation of the control plane and worker role.
+
+### Future Infrastructure Stage - Linux VM Cluster
+
+After the Kubernetes operations stage, the project can replace the `kind` implementation with a cluster built on Linux virtual machines. This is a separate stage, not a requirement for the first workload labs.
+
+- [ ] Create or provision Linux VMs with clearly separated control-plane and worker roles.
+- [ ] Explain what changes when a Node is a VM instead of a `kind` container.
+- [ ] Practice SSH access, Linux services, `containerd`, disks, and node-level logs.
+- [ ] Install and configure Kubernetes with a tool such as `kubeadm`.
+- [ ] Configure the CNI and verify node-to-node and Pod networking.
+- [ ] Compare the VM-based cluster with the local `kind` cluster.
+- [ ] Document which Kubernetes concepts stayed the same and which infrastructure concerns changed.
+
+**Scope:** this stage adds infrastructure realism without replacing the Kubernetes concepts already learned with `kind`.
 
 ### Day 02 - First Pod
 

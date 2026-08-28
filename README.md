@@ -98,7 +98,7 @@ The project will progressively cover:
 
 ## Status
 
-Stage 1: local environment setup in progress. The repository and initial documentation are published; create the first local cluster before starting the first lab.
+Stage 1: local environment setup is complete and the `kind` cluster is running. The first Pod lab has not started yet.
 
 ## Environment
 

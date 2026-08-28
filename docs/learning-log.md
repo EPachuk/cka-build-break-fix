@@ -42,7 +42,7 @@ The environment state is a snapshot of which prerequisites are installed, which 
 - `kubectl version --client`, `kind version`, and `helm version` verify the local tools.
 - `kind get clusters`, `kubectl config current-context`, and `kubectl cluster-info` verify whether a Kubernetes cluster exists and whether `kubectl` can reach it.
 
-At the end of the setup phase, the first group is ready but no `kind` cluster has been created yet. Creating the cluster and deploying the first Pod are deliberate lab actions, not silent installation steps.
+The supporting environment and the `kind` cluster are now ready, but no application Pod has been created yet. Creating the cluster and deploying the first Pod are deliberate lab actions, not silent installation steps.
 
 ### How the practice will work
 
