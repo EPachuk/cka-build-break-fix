@@ -12,6 +12,7 @@ Short notes from each working session. The focus is on what was built, what brok
 - Initial project documentation and `.gitignore`.
 - WSL2 base installation and `VirtualMachinePlatform` feature enabled.
 - Docker Desktop installation completed.
+- Git installed for version control and repository work.
 - `kubectl` 1.37.0, `kind` 0.33.0, and Helm 4.2.4 installed with `winget`.
 - Ubuntu installation started for WSL2.
 
@@ -32,6 +33,7 @@ The installation is part of the learning material. Nothing in the setup should b
 - **`kubectl`** is the Kubernetes command-line client. It sends requests to a Kubernetes API server using the current kubeconfig context. Installing it gives us a way to control a cluster, but there is no cluster until one is created and configured.
 - **`kind`** means Kubernetes IN Docker. It creates a local Kubernetes cluster by running Kubernetes node components in Docker containers. It is the tool for creating the disposable practice cluster; running `kind` itself is not the same as installing Kubernetes system-wide.
 - **Helm** is a package manager and release tool for Kubernetes applications. It is not required to create the first Pod, but it will be useful later for installing repeatable application stacks and learning chart-based deployments.
+- **Git** is version control software used to track manifests, documentation, and incident history. It is a project-development tool, not a Kubernetes component and not required for a cluster to run.
 
 ### What “environment state” means
 
@@ -43,6 +45,8 @@ The environment state is a snapshot of which prerequisites are installed, which 
 - `kind get clusters`, `kubectl config current-context`, and `kubectl cluster-info` verify whether a Kubernetes cluster exists and whether `kubectl` can reach it.
 
 The supporting environment and the `kind` cluster are now ready, but no application Pod has been created yet. Creating the cluster and deploying the first Pod are deliberate lab actions, not silent installation steps.
+
+Creating the cluster also started standard Kubernetes components and supporting services: the API Server, scheduler, controller manager, `etcd`, kubelet, CoreDNS, the CNI network plugin, kube-proxy, and a local storage provisioner. Their Kubernetes roles are general; the lab-specific part is that `kind` hosts the Node and these components inside a Docker container instead of using independent production servers.
 
 ### How the practice will work
 
