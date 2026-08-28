@@ -54,6 +54,25 @@ Incidents are documented with the symptom, observations, investigation, root cau
 
 The primary goal is learning, not merely completing commands. A lab is incomplete until the learner can explain what was done, why each component or command was needed, what state it produced, and how the result was verified. Each new step should be introduced with its purpose and checked through the learner's own explanation before moving on.
 
+## Working Model
+
+The learner executes the commands and owns the resulting environment. The guide explains the purpose and expected evidence before each step, reviews the output afterward, and checks understanding before continuing.
+
+- **PowerShell** is used for Windows, Docker Desktop, WSL, `kind`, and general `kubectl` commands.
+- **Ubuntu in WSL2** is used when a Linux shell or Linux-specific investigation is needed.
+- **The repository** contains project manifests, lab instructions, observations, and incident records.
+- **The chat** is used for explanations, questions, output review, and diagnosis; practical cluster changes are not performed silently on the learner's behalf.
+
+The local architecture is:
+
+```text
+Windows -> Docker Desktop and its WSL2/Linux backend -> Docker Engine
+		 -> kind node containers -> Kubernetes API Server
+		 -> kubectl connects to the API Server through kubeconfig
+```
+
+This setup is realistic for practicing the Kubernetes API, resources, contexts, manifests, and troubleshooting. It simplifies production infrastructure because the nodes are Docker containers rather than independent servers.
+
 ## CKA Domains
 
 The project will progressively cover:

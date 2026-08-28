@@ -44,6 +44,22 @@ The environment state is a snapshot of which prerequisites are installed, which 
 
 At the end of the setup phase, the first group is ready but no `kind` cluster has been created yet. Creating the cluster and deploying the first Pod are deliberate lab actions, not silent installation steps.
 
+### How the practice will work
+
+The learner runs each command in the indicated environment and brings the result back for review. PowerShell is the default shell for this Windows-based setup. Ubuntu in WSL2 is used when the exercise specifically requires a Linux shell or Linux investigation. The repository is used for manifests and project documentation; private machine-state notes remain outside it.
+
+Before each action, explain its purpose and expected result. After each action, inspect the actual state and ask the learner to explain what changed. The first Kubernetes action will be creating a `kind` cluster. Until that command is intentionally run, only the supporting environment exists.
+
+The local communication path is:
+
+```text
+kubectl -> kubeconfig -> Kubernetes API Server
+					   -> kind control-plane container
+Docker Desktop/Engine -> runs the kind node containers
+```
+
+This resembles real Kubernetes administration because the client communicates with the API Server, but `kind` simplifies the infrastructure by representing nodes as containers on the local machine.
+
 ### Commands learned
 
 - `winget install --id Git.Git --exact --scope user`
