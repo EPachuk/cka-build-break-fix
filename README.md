@@ -86,6 +86,10 @@ The following are choices specific to this local lab: Windows as the host, Docke
 
 The project will first use `kind` to learn Kubernetes operations, then can add a VM-based stage to study Node and cluster infrastructure more realistically.
 
+### Why Docker Desktop Is Installed
+
+Docker Desktop is not a universal Kubernetes requirement. It was installed because this lab runs on Windows and uses `kind`; `kind` needs a container provider, and Docker Desktop provides the Docker Engine that runs the container representing the local Node. If we later use Linux VMs as Nodes, Docker Desktop will no longer be needed for that outer layer. The VM will be the Node itself and will use a Kubernetes-compatible container runtime, such as `containerd`, to run Pod containers.
+
 ## CKA Domains
 
 The project will progressively cover:

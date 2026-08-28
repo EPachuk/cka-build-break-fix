@@ -68,6 +68,10 @@ The local implementation is specific to this lab. Windows, Docker Desktop, WSL2,
 
 Using `kind` is appropriate for the first stage because it focuses effort on Kubernetes operation: API access, resources, manifests, scheduling, reconciliation, networking, storage, and troubleshooting. It is less realistic for infrastructure work such as provisioning servers, SSH access, system services, disks, certificates, high availability, and production network boundaries. A later VM-based stage can cover those differences without obscuring the first Kubernetes concepts.
 
+### Why Docker Desktop was installed
+
+Docker Desktop is a lab-specific dependency, not a universal Kubernetes requirement. We installed it because the host is Windows and `kind` needs a container provider. Docker Desktop supplies the Docker Engine that runs the outer container representing the local Node. In a future VM-based stage, Docker Desktop would not be needed for that outer layer: the Linux VM would be the Node itself, and a Kubernetes-compatible runtime such as `containerd` would run the containers inside Pods.
+
 ### Security awareness without scope creep
 
 This local setup does not use SSH because we administer Kubernetes through its API Server rather than logging into a separate Linux VM. The API Server is exposed on `127.0.0.1` through a local port, so the lab is intended for access from this computer, not as a production network design. The connection uses HTTPS/TLS and credentials stored in the local kubeconfig.
