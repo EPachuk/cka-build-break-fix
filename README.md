@@ -52,6 +52,8 @@ Every lab should answer:
 
 Incidents are documented with the symptom, observations, investigation, root cause, fix, verification, and lessons learned.
 
+The primary goal is learning, not merely completing commands. A lab is incomplete until the learner can explain what was done, why each component or command was needed, what state it produced, and how the result was verified. Each new step should be introduced with its purpose and checked through the learner's own explanation before moving on.
+
 ## CKA Domains
 
 The project will progressively cover:
