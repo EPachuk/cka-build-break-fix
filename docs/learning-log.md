@@ -52,7 +52,7 @@ Creating the cluster also started standard Kubernetes components and supporting 
 
 The learner runs each command in the indicated environment and brings the result back for review. PowerShell is the default shell for this Windows-based setup. Ubuntu in WSL2 is used when the exercise specifically requires a Linux shell or Linux investigation. The repository is used for manifests and project documentation; private machine-state notes remain outside it.
 
-Before each action, explain its purpose and expected result. After each action, inspect the actual state and ask the learner to explain what changed. The first Kubernetes action will be creating a `kind` cluster. Until that command is intentionally run, only the supporting environment exists.
+Before each action, explain its purpose and expected result. After each action, inspect the actual state and ask the learner to explain what changed. The first Kubernetes action was creating a `kind` cluster; that action is now complete, and the first application Pod has not been created yet.
 
 The local communication path is:
 
@@ -110,17 +110,26 @@ These credentials and kubeconfig files must remain private and outside Git. Dock
 
 - Identify the first lab objective and verification steps.
 - Explain why Docker Desktop, WSL2, `kubectl`, and `kind` are needed for the first local cluster.
+- Explain the difference between the standard Kubernetes architecture and the local `kind` implementation.
+- Explain the difference between the `kind` context, the cluster, the Kubernetes Node, and the Docker container representing that Node.
+
+### Current checkpoint
+
+- The `cka-lab` cluster exists and is reachable through the `kind-cka-lab` context.
+- The cluster has one Node, `cka-lab-control-plane`, in `Ready` state.
+- The system Pods and the local storage provisioner are running.
+- Docker shows the `cka-lab-control-plane` container with the API Server port published on `127.0.0.1`.
+- The explicit namespace listing, active-context check, and formal Day 01 observation record are still pending.
 
 ### Questions / rabbit holes
 
-- Confirm whether Docker Desktop is running after the reboot.
-- Confirm that Ubuntu finished installing and complete its first-user setup if prompted.
+- Complete the two remaining read-only Day 01 checks.
+- Create the formal Day 01 observation record.
 
 ### Tomorrow
 
-- Reboot Windows.
-- Open a new PowerShell and verify `wsl --status`, `wsl --list --verbose`, Docker, `kubectl`, `kind`, and Helm.
-- Complete Ubuntu initialization if required.
-- Create a local cluster with `kind`.
-- Deploy and inspect the first Pod.
-- Trigger and diagnose `ImagePullBackOff`.
+- From PowerShell, verify the namespaces with `kubectl get namespaces --context kind-cka-lab`.
+- From PowerShell, verify the active context with `kubectl config current-context`.
+- Record the Day 01 observations and mark those checks complete.
+- Begin Day 02 by explaining Pod, container, image, namespace, and declarative manifest.
+- Create and inspect the first application Pod.
