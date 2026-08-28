@@ -31,7 +31,8 @@ The first lab mission is to create a local cluster, deploy and inspect a Pod, th
 cka-build-break-fix/
 ├── README.md
 ├── docs/
-│   └── learning-log.md
+│   ├── learning-log.md
+│   └── lab-roadmap.md
 ├── labs/
 ├── incidents/
 ├── app/
@@ -39,6 +40,8 @@ cka-build-break-fix/
 ```
 
 The structure will expand as new CKA domains are covered.
+
+The day-by-day checklist is in [docs/lab-roadmap.md](docs/lab-roadmap.md). It tracks practical work, evidence, and understanding from the first cluster through the final review.
 
 ## Learning Method
 
