@@ -119,17 +119,20 @@ These credentials and kubeconfig files must remain private and outside Git. Dock
 - The cluster has one Node, `cka-lab-control-plane`, in `Ready` state.
 - The system Pods and the local storage provisioner are running.
 - Docker shows the `cka-lab-control-plane` container with the API Server port published on `127.0.0.1`.
-- The explicit namespace listing, active-context check, and formal Day 01 observation record are still pending.
+- The explicit namespace listing, active-context check, and formal Day 01 observation record are complete.
+- Day 02 created the `web` Pod from `labs/01-pods/web-pod.yaml`.
+- The `web` Pod is `Running` and `Ready` on `cka-lab-control-plane` with Pod IP `10.244.0.5`.
+- The Pod's `describe` output showed the lifecycle events `Scheduled`, `Pulling`, `Pulled`, `Created`, and `Started`.
 
 ### Questions / rabbit holes
 
-- Complete the two remaining read-only Day 01 checks.
-- Create the formal Day 01 observation record.
+- Read the nginx logs and execute a command inside the Pod.
+- Compare the desired state in YAML with the observed state.
+- Finish the formal Day 02 inspection record.
 
 ### Tomorrow
 
-- From PowerShell, verify the namespaces with `kubectl get namespaces --context kind-cka-lab`.
-- From PowerShell, verify the active context with `kubectl config current-context`.
-- Record the Day 01 observations and mark those checks complete.
-- Begin Day 02 by explaining Pod, container, image, namespace, and declarative manifest.
-- Create and inspect the first application Pod.
+- From PowerShell, read the nginx logs with `kubectl logs`.
+- From PowerShell, execute a safe command inside the Pod with `kubectl exec`.
+- Compare the manifest with the observed Pod state and finish Day 02 documentation.
+- Review the completed Day 02 understanding before starting the `ImagePullBackOff` exercise.

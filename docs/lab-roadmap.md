@@ -49,13 +49,15 @@ After the Kubernetes operations stage, the project can replace the `kind` implem
 
 ### Day 02 - First Pod
 
-- [ ] Explain Pod, container, image, namespace, and declarative manifest.
-- [ ] Create a Pod from YAML in the repository.
+- [x] Explain Pod, container, image, namespace, and declarative manifest.
+- [x] Create a Pod from YAML in the repository.
 - [ ] Use `kubectl get`, `describe`, `logs`, and `exec` to inspect it.
 - [ ] Compare the desired state in YAML with the observed state.
 - [ ] Document the Pod lifecycle and useful inspection commands.
 
 **Evidence:** a working Pod manifest and an inspection record.
+
+**Current result:** The `web` Pod is `Running` on `cka-lab-control-plane` with Pod IP `10.244.0.5`. See [docs/day-02-observations.md](day-02-observations.md) for the current evidence and remaining work.
 
 ### Day 03 - Break and Diagnose `ImagePullBackOff`
 
