@@ -102,7 +102,7 @@ The project will progressively cover:
 
 ## Status
 
-Stage 1: local environment setup is complete and the `kind` cluster is running. The first Pod lab has not started yet.
+Stage 1: Day 01 is complete. The `kind` cluster is running and its environment, architecture, and observations are documented; the first Pod lab has not started yet.
 
 ## Environment
 

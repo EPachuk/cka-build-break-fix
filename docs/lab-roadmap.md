@@ -26,10 +26,12 @@ PowerShell is the default shell for this Windows-based lab. Ubuntu in WSL2 is us
 - [x] Explain what a Kubernetes cluster contains at a high level.
 - [x] Create the `kind` cluster from PowerShell.
 - [x] Inspect the Node and system Pods.
-- [ ] Inspect namespaces explicitly and verify the active `kubectl` context.
-- [ ] Record the cluster creation and observations.
+- [x] Inspect namespaces explicitly and verify the active `kubectl` context.
+- [x] Record the cluster creation and observations.
 
 **Evidence:** a reachable cluster, a valid `kubectl` context, and an explanation of the control plane and worker role.
+
+**Day 01 result:** Complete. See [docs/day-01-observations.md](day-01-observations.md) for the commands, evidence, and final mental model.
 
 ### Future Infrastructure Stage - Linux VM Cluster
 
