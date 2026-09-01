@@ -31,7 +31,6 @@ The first lab mission is to create a local cluster, deploy and inspect a Pod, th
 cka-build-break-fix/
 ├── README.md
 ├── docs/
-│   ├── continuation.md
 │   ├── day-01-observations.md
 │   ├── day-02-observations.md
 │   ├── day-03-observations.md
