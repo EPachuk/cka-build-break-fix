@@ -120,19 +120,65 @@ These credentials and kubeconfig files must remain private and outside Git. Dock
 - The system Pods and the local storage provisioner are running.
 - Docker shows the `cka-lab-control-plane` container with the API Server port published on `127.0.0.1`.
 - The explicit namespace listing, active-context check, and formal Day 01 observation record are complete.
-- Day 02 created the `web` Pod from `labs/01-pods/web-pod.yaml`.
-- The `web` Pod is `Running` and `Ready` on `cka-lab-control-plane` with Pod IP `10.244.0.5`.
-- The Pod's `describe` output showed the lifecycle events `Scheduled`, `Pulling`, `Pulled`, `Created`, and `Started`.
 
-### Questions / rabbit holes
+## Day 02
 
-- Read the nginx logs and execute a command inside the Pod.
-- Compare the desired state in YAML with the observed state.
-- Finish the formal Day 02 inspection record.
+### Built and inspected
 
-### Tomorrow
+- Created the `web` Pod declaratively from `labs/01-pods/web-pod.yaml`.
+- Verified that the Pod is `Running` and `Ready` on `cka-lab-control-plane` with Pod IP `10.244.0.5`.
+- Used `get`, `describe`, `logs`, and `exec` to inspect the Pod and its container.
+- Observed the lifecycle events `Scheduled`, `Pulling`, `Pulled`, `Created`, and `Started`.
+- Confirmed from the logs that the nginx entrypoint completed its configuration and nginx 1.27.5 started its worker processes without errors.
+- Executed `hostname` inside the container and observed `web`.
+- Compared the repository manifest with the complete Pod object returned by the API Server.
 
-- From PowerShell, read the nginx logs with `kubectl logs`.
-- From PowerShell, execute a safe command inside the Pod with `kubectl exec`.
-- Compare the manifest with the observed Pod state and finish Day 02 documentation.
-- Review the completed Day 02 understanding before starting the `ImagePullBackOff` exercise.
+### New concepts
+
+- The repository manifest expresses the requested configuration; it is not a complete record of the live object.
+- `spec` represents desired state, including Kubernetes defaults, while `status` represents observed state.
+- `metadata` identifies and tracks the stored Kubernetes object.
+- `kubectl logs` observes container output; `kubectl exec` starts an additional process inside a running container.
+- `state.running`, `started: true`, `ready: true`, zero restarts, and healthy startup logs provide evidence that nginx is operating.
+- An image tag expresses the requested reference, while the image digest identifies the exact content that ran.
+
+### What I can now do without help
+
+- Explain the difference between the local manifest and the Pod YAML returned by the API Server.
+- Identify desired state in `spec` and observed state in `status`.
+- Use Pod status and container logs together to verify whether an application started successfully.
+- Explain why `--namespace` and `--context` make the target of a command explicit.
+
+### Current checkpoint
+
+- Day 02 is complete and documented in `docs/day-02-observations.md`.
+- The healthy Pod provides the baseline for the Build-Break-Fix comparison in Day 03.
+- The intentional `ImagePullBackOff` exercise has not started.
+
+### Next session
+
+- Explain what an image pull is and which components participate before changing anything.
+- Introduce an intentionally invalid image.
+- Observe, diagnose, fix, and document the resulting `ImagePullBackOff` incident.
+
+## Day 03
+
+### Objective
+
+Create a controlled image-pull failure, observe how Kubernetes reports it, diagnose the root cause from evidence, restore the healthy image, and verify recovery.
+
+### Work completed
+
+- Reviewed the image-pull path from Pod `spec`, through kubelet and `containerd`, to the image registry.
+- Distinguished `ErrImagePull`, a failed pull attempt, from `ImagePullBackOff`, the delay Kubernetes applies between repeated attempts.
+- Verified the healthy baseline: Pod `web` was `1/1 Running`, had zero restarts, and had been running for `2d15h`.
+- Changed only the image field from `nginx:1.27` to `nginx:cka-intentionally-missing`.
+- Reviewed the scoped Git diff before changing the cluster.
+- Applied the manifest and observed `pod/web configured`, confirming that the API Server accepted the new desired state.
+
+### Current checkpoint
+
+- The repository and the cluster now request the intentionally invalid image.
+- The API Server accepting the manifest does not prove that the image can be pulled or run.
+- No runtime status or event output has been collected after the change.
+- The next action is a read-only watch of the Pod state; diagnosis and recovery remain pending.

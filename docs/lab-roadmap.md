@@ -51,24 +51,26 @@ After the Kubernetes operations stage, the project can replace the `kind` implem
 
 - [x] Explain Pod, container, image, namespace, and declarative manifest.
 - [x] Create a Pod from YAML in the repository.
-- [ ] Use `kubectl get`, `describe`, `logs`, and `exec` to inspect it.
-- [ ] Compare the desired state in YAML with the observed state.
-- [ ] Document the Pod lifecycle and useful inspection commands.
+- [x] Use `kubectl get`, `describe`, `logs`, and `exec` to inspect it.
+- [x] Compare the desired state in YAML with the observed state.
+- [x] Document the Pod lifecycle and useful inspection commands.
 
 **Evidence:** a working Pod manifest and an inspection record.
 
-**Current result:** The `web` Pod is `Running` on `cka-lab-control-plane` with Pod IP `10.244.0.5`. See [docs/day-02-observations.md](day-02-observations.md) for the current evidence and remaining work.
+**Day 02 result:** Complete. The `web` Pod is `Running` on `cka-lab-control-plane`; its logs, container environment, desired state, and observed state were inspected. See [docs/day-02-observations.md](day-02-observations.md) for the evidence and final mental model.
 
 ### Day 03 - Break and Diagnose `ImagePullBackOff`
 
-- [ ] Explain what happens when a node cannot pull an image.
-- [ ] Change the Pod to use an intentionally invalid image.
+- [x] Explain what happens when a node cannot pull an image.
+- [x] Change the Pod to use an intentionally invalid image.
 - [ ] Observe the status and events over time.
 - [ ] Diagnose the root cause with `describe` and events.
 - [ ] Fix the image and verify recovery.
 - [ ] Write the incident using the Build-Break-Fix format.
 
 **Evidence:** a complete incident with symptom, evidence, root cause, fix, and verification.
+
+**Current result:** In progress. The healthy baseline was `1/1 Running` with zero restarts after `2d15h`. The invalid image was applied and `kubectl` returned `pod/web configured`. Runtime failure evidence has not yet been collected. See [docs/day-03-observations.md](day-03-observations.md) and [incidents/001-image-pull-backoff.md](../incidents/001-image-pull-backoff.md).
 
 ### Day 04 - Deployments and ReplicaSets
 

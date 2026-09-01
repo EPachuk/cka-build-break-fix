@@ -31,12 +31,17 @@ The first lab mission is to create a local cluster, deploy and inspect a Pod, th
 cka-build-break-fix/
 ├── README.md
 ├── docs/
-│   ├── learning-log.md
-│   └── lab-roadmap.md
-├── labs/
+│   ├── continuation.md
+│   ├── day-01-observations.md
+│   ├── day-02-observations.md
+│   ├── day-03-observations.md
+│   ├── lab-roadmap.md
+│   └── learning-log.md
 ├── incidents/
-├── app/
-└── backlog/
+│   └── 001-image-pull-backoff.md
+└── labs/
+    └── 01-pods/
+        └── web-pod.yaml
 ```
 
 The structure will expand as new CKA domains are covered.
@@ -102,7 +107,7 @@ The project will progressively cover:
 
 ## Status
 
-Stage 1: Day 01 is complete. The `kind` cluster is running and its environment, architecture, and observations are documented; the first Pod lab has not started yet.
+Stage 1: Days 01 and 02 are complete. Day 03 is in progress: the healthy `web` Pod baseline was verified, its manifest was changed to request the intentionally invalid image `nginx:cka-intentionally-missing`, and the API Server accepted the update. The failure has not yet been observed or diagnosed, so `ImagePullBackOff` is still an expected result rather than recorded evidence.
 
 ## Environment
 

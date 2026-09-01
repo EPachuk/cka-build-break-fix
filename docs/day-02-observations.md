@@ -90,6 +90,48 @@ Scheduled -> Pulling -> Pulled -> Created -> Started
 
 This means the scheduler selected the Node, the kubelet requested the image, the runtime pulled the image, created the container, and started nginx.
 
+### Read the container logs
+
+```powershell
+kubectl logs web --namespace default --context kind-cka-lab
+```
+
+The logs showed the official nginx entrypoint applying its startup configuration and then starting nginx 1.27.5. Nginx reported the Linux WSL2 kernel, started its worker processes, and produced no error messages. No HTTP access entries were present because no request had been sent to the Pod.
+
+### Execute a command in the container
+
+```powershell
+kubectl exec web --namespace default --context kind-cka-lab -- hostname
+```
+
+Observed:
+
+```text
+web
+```
+
+The command ran as a short-lived process inside the existing `nginx` container and returned the Pod hostname. It did not run in PowerShell, replace nginx, restart the container, or create another Pod. The `--` separator distinguishes the `kubectl` arguments from the command sent to the container.
+
+### Compare desired and observed state
+
+```powershell
+kubectl get pod web --namespace default --context kind-cka-lab --output yaml
+```
+
+The object returned by the API Server was compared with the repository manifest:
+
+- the repository manifest expresses the requested Pod configuration;
+- `spec` contains the desired state, including defaults added by Kubernetes;
+- `metadata` identifies and tracks the stored object;
+- `status` reports the state observed by Kubernetes;
+- the scheduler added `nodeName: cka-lab-control-plane` after selecting the Node;
+- Kubernetes added defaults such as `restartPolicy: Always`, `dnsPolicy: ClusterFirst`, and `imagePullPolicy: IfNotPresent`;
+- Kubernetes projected the default ServiceAccount credentials into a read-only volume;
+- `phase: Running`, `state.running`, `started: true`, `ready: true`, and `restartCount: 0` confirmed that the container was operating normally;
+- the requested tag remained `nginx:1.27`, while `imageID` identified the exact downloaded image by digest.
+
+The learner explained the central distinction: the file in the repository states what should be created, while the API Server response shows the stored object, its completed desired state, and its observed runtime status.
+
 ## Mental Model
 
 ```text
@@ -106,11 +148,6 @@ Node cka-lab-control-plane
 
 The namespace organizes the Pod logically. The Node provides the execution capacity. The Pod is the Kubernetes work unit. The container runs the nginx process from the image.
 
-## Still Pending
+## Day 02 Result
 
-- [ ] Read the nginx logs.
-- [ ] Execute a command inside the running container with `kubectl exec`.
-- [ ] Compare the YAML desired state with the observed state.
-- [ ] Document the Pod lifecycle and inspection commands completely.
-
-The intentional `ImagePullBackOff` failure belongs to Day 03 and has not started.
+Day 02 is complete. The Pod was created declaratively and inspected with `get`, `describe`, `logs`, and `exec`. Its desired configuration was compared with the object and runtime status reported by Kubernetes. The intentional `ImagePullBackOff` failure belongs to Day 03 and has not started.
