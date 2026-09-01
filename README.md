@@ -31,6 +31,7 @@ The first lab mission is to create a local cluster, deploy and inspect a Pod, th
 cka-build-break-fix/
 ├── README.md
 ├── docs/
+│   ├── cka-commands-by-day.md
 │   ├── day-01-observations.md
 │   ├── day-02-observations.md
 │   ├── day-03-observations.md
@@ -46,6 +47,8 @@ cka-build-break-fix/
 The structure will expand as new CKA domains are covered.
 
 The day-by-day checklist is in [docs/lab-roadmap.md](docs/lab-roadmap.md). It tracks practical work, evidence, and understanding from the first cluster through the final review.
+
+The exam-focused command reference is in [docs/cka-commands-by-day.md](docs/cka-commands-by-day.md). It records only Kubernetes commands actually practiced in the lab and excludes local environment setup.
 
 ## Learning Method
 
@@ -106,7 +109,7 @@ The project will progressively cover:
 
 ## Status
 
-Stage 1: Days 01 and 02 are complete. Day 03 is in progress: the healthy `web` Pod baseline was verified, its manifest was changed to request the intentionally invalid image `nginx:cka-intentionally-missing`, and the API Server accepted the update. The failure has not yet been observed or diagnosed, so `ImagePullBackOff` is still an expected result rather than recorded evidence.
+Stage 1: Days 01 through 03 are complete. The `web` Pod was inspected while healthy, changed to request an invalid image, observed in `ErrImagePull` and `ImagePullBackOff`, diagnosed from container state and kubelet events, restored to `nginx:1.27`, and verified as `1/1 Running` with healthy nginx startup logs.
 
 ## Environment
 

@@ -175,10 +175,33 @@ Create a controlled image-pull failure, observe how Kubernetes reports it, diagn
 - Changed only the image field from `nginx:1.27` to `nginx:cka-intentionally-missing`.
 - Reviewed the scoped Git diff before changing the cluster.
 - Applied the manifest and observed `pod/web configured`, confirming that the API Server accepted the new desired state.
+- Observed `0/1 ImagePullBackOff` with zero restarts and the original Pod age.
+- Used `describe` to distinguish Pod phase from container readiness and to inspect kubelet events.
+- Observed a fresh `ErrImagePull` after changing to a second invalid tag.
+- Queried and watched events scoped to Pod `web`.
+- Diagnosed the invalid image reference as the failing stage while noting that the detailed registry response had expired.
+- Restored `nginx:1.27`, applied it, and observed recovery to `1/1 Running`.
+- Verified from current logs that nginx 1.27.5 configured itself and started its workers without errors.
 
-### Current checkpoint
+### New concepts
 
-- The repository and the cluster now request the intentionally invalid image.
-- The API Server accepting the manifest does not prove that the image can be pulled or run.
-- No runtime status or event output has been collected after the change.
-- The next action is a read-only watch of the Pod state; diagnosis and recovery remain pending.
+- Pod phase `Running` and container readiness describe different levels of state.
+- `ErrImagePull` is a failed attempt; `ImagePullBackOff` is the retry delay that follows failures.
+- A replacement container that never starts does not initially increase restart count.
+- Kubernetes events are retained for a limited time and repeated events may be aggregated.
+- Updating the container image can preserve the Pod object and age while starting a new container execution.
+
+### What I can now do without help
+
+- Establish a healthy baseline before introducing a controlled failure.
+- Use `get`, `describe`, and events to isolate an image-pull problem.
+- Explain why API acceptance is different from successful execution.
+- Distinguish Pod phase, container state, readiness, and restart count.
+- Restore a valid image and verify recovery using both Kubernetes state and application logs.
+
+### Result
+
+- Day 03 is complete.
+- Incident 001 is resolved and documented.
+- The manifest and live Pod request `nginx:1.27`.
+- The Pod is `1/1 Running`, and nginx startup logs are healthy.

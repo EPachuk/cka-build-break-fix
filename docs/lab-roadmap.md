@@ -63,14 +63,14 @@ After the Kubernetes operations stage, the project can replace the `kind` implem
 
 - [x] Explain what happens when a node cannot pull an image.
 - [x] Change the Pod to use an intentionally invalid image.
-- [ ] Observe the status and events over time.
-- [ ] Diagnose the root cause with `describe` and events.
-- [ ] Fix the image and verify recovery.
-- [ ] Write the incident using the Build-Break-Fix format.
+- [x] Observe the status and events over time.
+- [x] Diagnose the root cause with `describe` and events.
+- [x] Fix the image and verify recovery.
+- [x] Write the incident using the Build-Break-Fix format.
 
 **Evidence:** a complete incident with symptom, evidence, root cause, fix, and verification.
 
-**Current result:** In progress. The healthy baseline was `1/1 Running` with zero restarts after `2d15h`. The invalid image was applied and `kubectl` returned `pod/web configured`. Runtime failure evidence has not yet been collected. See [docs/day-03-observations.md](day-03-observations.md) and [incidents/001-image-pull-backoff.md](../incidents/001-image-pull-backoff.md).
+**Day 03 result:** Complete. The invalid image produced `ErrImagePull` and `ImagePullBackOff`; kubelet events identified the failed image-pull stage. Restoring `nginx:1.27` returned the Pod to `1/1 Running`, and nginx startup logs verified application recovery. See [docs/day-03-observations.md](day-03-observations.md) and [incidents/001-image-pull-backoff.md](../incidents/001-image-pull-backoff.md).
 
 ### Day 04 - Deployments and ReplicaSets
 
